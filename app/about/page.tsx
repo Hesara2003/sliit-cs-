@@ -28,7 +28,7 @@ export default function AboutPage() {
       linkedin: "#",
       github: "#",
       email: "nimasha@sliitcshub.lk",
-      gradient: "from-purple-500 to-pink-500",
+      gradient: "from-orange-500 to-red-500",
     },
     {
       name: "Tharindu Silva",
@@ -39,7 +39,7 @@ export default function AboutPage() {
       linkedin: "#",
       github: "#",
       email: "tharindu@sliitcshub.lk",
-      gradient: "from-green-500 to-emerald-500",
+      gradient: "from-blue-600 to-orange-500",
     },
     {
       name: "Kavindi Fernando",
@@ -50,7 +50,7 @@ export default function AboutPage() {
       linkedin: "#",
       github: "#",
       email: "kavindi@sliitcshub.lk",
-      gradient: "from-orange-500 to-red-500",
+      gradient: "from-orange-500 to-yellow-500",
     },
   ]
 
@@ -61,7 +61,7 @@ export default function AboutPage() {
       department: "Computer Science & Software Engineering",
       specialization: "Artificial Intelligence, Deep Learning & Computer Vision",
       image: "/placeholder.svg?height=100&width=100",
-      gradient: "from-indigo-500 to-purple-500",
+      gradient: "from-blue-500 to-cyan-500",
     },
     {
       name: "Prof. Janaka Wijerathne",
@@ -69,7 +69,7 @@ export default function AboutPage() {
       department: "Computer Science & Software Engineering", 
       specialization: "Software Engineering, Mobile Technologies & IoT",
       image: "/placeholder.svg?height=100&width=100",
-      gradient: "from-teal-500 to-cyan-500",
+      gradient: "from-orange-500 to-red-500",
     },
   ]
 
@@ -86,35 +86,35 @@ export default function AboutPage() {
       icon: Award,
       title: "🎯 Skill Mastery",
       description: "Empowering students through hands-on workshops, coding bootcamps, and real-world projects that bridge the gap between theory and practice.",
-      gradient: "from-purple-500 to-pink-500",
+      gradient: "from-orange-500 to-red-500",
       delay: "0.1s",
     },
     {
       icon: Target,
       title: "🏢 Industry Bridge",
       description: "Connecting ambitious students with industry leaders through networking events, guest lectures, and exclusive internship opportunities.",
-      gradient: "from-green-500 to-emerald-500",
+      gradient: "from-blue-600 to-orange-500",
       delay: "0.2s",
     },
     {
       icon: Heart,
       title: "💡 Innovation Lab",
       description: "Nurturing creative minds and providing resources, mentorship, and funding for students to transform ideas into breakthrough solutions.",
-      gradient: "from-red-500 to-pink-500",
+      gradient: "from-orange-600 to-red-500",
       delay: "0.3s",
     },
     {
       icon: TrendingUp,
       title: "📚 Academic Excellence",
       description: "Supporting academic success through peer tutoring, study circles, exam prep sessions, and collaborative learning initiatives.",
-      gradient: "from-yellow-500 to-orange-500",
+      gradient: "from-blue-500 to-orange-500",
       delay: "0.4s",
     },
     {
       icon: Target,
       title: "🚀 Career Launchpad",
       description: "Preparing students for successful careers with resume workshops, mock interviews, placement assistance, and alumni mentorship programs.",
-      gradient: "from-indigo-500 to-purple-500",
+      gradient: "from-orange-500 to-yellow-500",
       delay: "0.5s",
     },
   ]
@@ -136,7 +136,7 @@ export default function AboutPage() {
           backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px)`,
           backgroundSize: '40px 40px'
         }} />
-        <div className="absolute inset-0 hero-gradient opacity-80" />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-orange-900/30 to-background/50 opacity-80" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/10 to-background/30" />
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center space-y-10 max-w-5xl mx-auto animate-slide-up">
@@ -176,7 +176,7 @@ export default function AboutPage() {
           backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px)`,
           backgroundSize: '20px 20px'
         }} />
-        <div className="absolute inset-0 bg-gradient-to-br from-background/95 via-background/98 to-background/95" />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/10 via-orange-900/15 to-background/20" />
         <div className="container mx-auto px-4 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <Card className="card-hover glass-effect border-gradient animate-scale-in hover:scale-105 transition-all duration-500 group">
@@ -202,7 +202,7 @@ export default function AboutPage() {
             >
               <CardHeader>
                 <div className="flex items-center space-x-4 mb-6">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 p-4 neon-glow group-hover:rotate-12 transition-transform duration-500">
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-500 to-red-500 p-4 neon-glow group-hover:rotate-12 transition-transform duration-500">
                     <Target className="h-8 w-8 text-white" />
                   </div>
                   <CardTitle className="text-3xl group-hover:text-primary transition-colors">🎯 Our Mission</CardTitle>
@@ -225,7 +225,7 @@ export default function AboutPage() {
           backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px)`,
           backgroundSize: '40px 40px'
         }} />
-        <div className="absolute inset-0 bg-gradient-to-br from-muted/20 via-muted/30 to-muted/40" />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-orange-900/30 to-muted/40" />
         <div className="absolute inset-0 particles-bg opacity-20" />
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center space-y-8 mb-20 animate-slide-up">
@@ -269,7 +269,7 @@ export default function AboutPage() {
           backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px)`,
           backgroundSize: '20px 20px'
         }} />
-        <div className="absolute inset-0 bg-gradient-to-br from-background/95 via-background/98 to-background/95" />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/10 via-orange-900/15 to-background/20" />
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center space-y-8 mb-20 animate-slide-up">
             <Badge variant="outline" className="glass-effect hover:scale-105 transition-transform">
@@ -338,7 +338,7 @@ export default function AboutPage() {
           backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px)`,
           backgroundSize: '40px 40px'
         }} />
-        <div className="absolute inset-0 bg-gradient-to-br from-muted/20 via-muted/30 to-muted/40" />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-orange-900/30 to-muted/40" />
         <div className="absolute inset-0 particles-bg opacity-20" />
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center space-y-8 mb-20 animate-slide-up">
@@ -397,7 +397,7 @@ export default function AboutPage() {
           backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px)`,
           backgroundSize: '20px 20px'
         }} />
-        <div className="absolute inset-0 bg-gradient-to-br from-background/95 via-background/98 to-background/95" />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/10 via-orange-900/15 to-background/20" />
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center space-y-8 mb-20 animate-slide-up">
             <Badge variant="outline" className="glass-effect hover:scale-105 transition-transform">
@@ -413,9 +413,9 @@ export default function AboutPage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
               { number: "500+", label: "Passionate Members", gradient: "from-blue-500 to-cyan-500", delay: "0s", icon: "👥", desc: "Growing strong!" },
-              { number: "50+", label: "Epic Campus Events", gradient: "from-purple-500 to-pink-500", delay: "0.1s", icon: "🎓", desc: "And counting!" },
-              { number: "25+", label: "Industry Partners", gradient: "from-green-500 to-emerald-500", delay: "0.2s", icon: "🤝", desc: "Top companies!" },
-              { number: "100+", label: "Amazing Projects", gradient: "from-orange-500 to-red-500", delay: "0.3s", icon: "🚀", desc: "Built together!" },
+              { number: "50+", label: "Epic Campus Events", gradient: "from-orange-500 to-red-500", delay: "0.1s", icon: "🎓", desc: "And counting!" },
+              { number: "25+", label: "Industry Partners", gradient: "from-blue-600 to-orange-500", delay: "0.2s", icon: "🤝", desc: "Top companies!" },
+              { number: "100+", label: "Amazing Projects", gradient: "from-orange-500 to-yellow-500", delay: "0.3s", icon: "🚀", desc: "Built together!" },
             ].map((stat, index) => (
               <div key={index} className={`text-center animate-scale-in hover:scale-110 transition-transform duration-300 cursor-pointer group`} style={{ animationDelay: stat.delay }}>
                 <div className="mb-4 text-5xl group-hover:animate-bounce">{stat.icon}</div>
