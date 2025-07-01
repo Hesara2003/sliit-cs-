@@ -11,7 +11,6 @@ export const metadata: Metadata = {
   title: "SLIIT CS Hub - Computer Science Student Community",
   description:
     "Official website of SLIIT Computer Science student community. Join us for events, resources, and collaborative learning.",
-    generator: 'v0.dev'
 }
 
 export default function RootLayout({
