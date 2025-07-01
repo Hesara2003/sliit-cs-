@@ -64,7 +64,7 @@ export function LoadingScreen() {
       </div>
 
       {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-purple-900/30 to-black" />
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-orange-900/30 to-black" />
       
       {/* Animated grid */}
       <div className="absolute inset-0 opacity-20" style={{ 
@@ -82,18 +82,18 @@ export function LoadingScreen() {
             {/* Outer rotating ring */}
             <div className="absolute inset-0 w-32 h-32 mx-auto">
               <div className="w-full h-full border-2 border-blue-500/30 rounded-full animate-spin-slow" />
-              <div className="absolute inset-2 border-2 border-purple-500/50 rounded-full animate-ping" />
+              <div className="absolute inset-2 border-2 border-orange-500/50 rounded-full animate-ping" />
             </div>
             
             {/* Logo container */}
-            <div className="relative w-32 h-32 mx-auto rounded-full bg-gradient-to-br from-blue-500 via-purple-600 to-blue-700 p-1 shadow-2xl shadow-blue-500/50">
+            <div className="relative w-32 h-32 mx-auto rounded-full bg-gradient-to-br from-blue-500 via-orange-600 to-blue-700 p-1 shadow-2xl shadow-blue-500/50">
               <div className="w-full h-full bg-black rounded-full flex items-center justify-center relative overflow-hidden">
                 {/* Inner glow */}
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-full animate-pulse" />
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-orange-600/20 rounded-full animate-pulse" />
                 
                 {/* Logo text */}
                 <div className="relative z-10 text-center">
-                  <div className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent animate-pulse">
+                  <div className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-orange-400 bg-clip-text text-transparent animate-pulse">
                     CS
                   </div>
                   <div className="text-xs text-blue-300 font-medium tracking-widest">
@@ -106,7 +106,7 @@ export function LoadingScreen() {
 
           {/* Brand name with enhanced styling */}
           <div className="space-y-4">
-            <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-blue-500 bg-clip-text text-transparent animate-text-shimmer">
+            <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-400 via-orange-400 to-blue-500 bg-clip-text text-transparent animate-text-shimmer">
               SLIIT CS Hub
             </h1>
             <p className="text-xl text-blue-200/80 font-light tracking-wide">
@@ -120,18 +120,18 @@ export function LoadingScreen() {
             <div className="relative">
               <div className="w-full bg-gray-800 rounded-full h-3 overflow-hidden shadow-inner">
                 <div 
-                  className="h-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-full transition-all duration-500 ease-out relative"
+                  className="h-full bg-gradient-to-r from-blue-500 to-orange-600 rounded-full transition-all duration-500 ease-out relative"
                   style={{ width: `${progress}%` }}
                 >
                   {/* Animated glow on progress bar */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full animate-pulse opacity-75" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-orange-500 rounded-full animate-pulse opacity-75" />
                   {/* Moving highlight */}
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent rounded-full animate-slide-right" />
                 </div>
               </div>
               {/* Progress glow */}
               <div 
-                className="absolute top-0 h-3 bg-gradient-to-r from-blue-500/50 to-purple-600/50 rounded-full blur-md transition-all duration-500"
+                className="absolute top-0 h-3 bg-gradient-to-r from-blue-500/50 to-orange-600/50 rounded-full blur-md transition-all duration-500"
                 style={{ width: `${progress}%` }}
               />
             </div>
@@ -152,7 +152,7 @@ export function LoadingScreen() {
             {[...Array(5)].map((_, i) => (
               <div
                 key={i}
-                className="w-3 h-3 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full animate-bounce"
+                className="w-3 h-3 bg-gradient-to-r from-blue-400 to-orange-500 rounded-full animate-bounce"
                 style={{ 
                   animationDelay: `${i * 0.2}s`,
                   animationDuration: '1.4s'

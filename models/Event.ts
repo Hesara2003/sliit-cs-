@@ -4,6 +4,7 @@ import mongoose, { Document, Model, Schema } from 'mongoose';
 export interface IEvent extends Document {
   _id: string;
   title: string;
+  slug: string;
   description: string;
   content?: string; // Rich text content
   date: Date;
@@ -32,6 +33,13 @@ const EventSchema: Schema<IEvent> = new Schema(
     title: {
       type: String,
       required: [true, 'Event title is required'],
+      trim: true,
+    },
+    slug: {
+      type: String,
+      required: [true, 'Slug is required'],
+      unique: true,
+      lowercase: true,
       trim: true,
     },
     description: {

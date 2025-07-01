@@ -74,8 +74,8 @@ export default function HomePage() {
               <div className="flex items-center space-x-8 text-sm">
                 {[
                   { icon: Users, label: "Active Students", color: "text-blue-500", count: "500+" },
-                  { icon: Calendar, label: "Campus Events", color: "text-green-500", count: "50+" },
-                  { icon: BookOpen, label: "Study Resources", color: "text-purple-500", count: "100+" },
+                  { icon: Calendar, label: "Campus Events", color: "text-orange-500", count: "50+" },
+                  { icon: BookOpen, label: "Study Resources", color: "text-blue-400", count: "100+" },
                 ].map((stat, index) => (
                   <div
                     key={index}
@@ -95,8 +95,8 @@ export default function HomePage() {
             </div>
 
             <div className="relative animate-float">
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-blue-600/20 rounded-3xl blur-3xl animate-pulse-slow" />
-              <div className="relative w-full h-96 bg-gradient-to-br from-primary/20 to-blue-600/20 rounded-3xl flex items-center justify-center glass-effect border-gradient hover:scale-105 transition-transform duration-700">
+              <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-orange-600/20 rounded-3xl blur-3xl animate-pulse-slow" />
+              <div className="relative w-full h-96 bg-gradient-to-br from-primary/20 to-orange-600/20 rounded-3xl flex items-center justify-center glass-effect border-gradient hover:scale-105 transition-transform duration-700">
                 <div className="text-center space-y-6">
                   <div className="relative group">
                     <Code className="h-32 w-32 mx-auto text-primary animate-pulse-slow group-hover:rotate-12 transition-transform duration-500" />
@@ -152,7 +152,7 @@ export default function HomePage() {
                 icon: Users,
                 title: "🤝 Project Collaboration",
                 description: "Team up with fellow CS students for assignments, hackathons, and final year projects. Find the perfect project partners and build amazing things together.",
-                color: "from-purple-500 to-pink-500",
+                color: "from-orange-500 to-red-500",
                 delay: "0.2s",
                 feature: "Team Formation Hub"
               },
@@ -160,7 +160,7 @@ export default function HomePage() {
                 icon: Zap,
                 title: "🚀 Career Development",
                 description: "Prepare for internships and job placements with interview prep, coding practice, and industry connections. Build your portfolio with real projects.",
-                color: "from-orange-500 to-red-500",
+                color: "from-blue-500 to-orange-500",
                 delay: "0.4s",
                 feature: "Career Guidance Center"
               },
@@ -231,7 +231,7 @@ export default function HomePage() {
                 time: "24 Hours of Innovation",
                 type: "⚡ Campus Competition",
                 description: "Annual CS department hackathon with prizes, industry mentors, and potential internship opportunities",
-                gradient: "from-purple-500 to-pink-500",
+                gradient: "from-orange-500 to-red-500",
                 delay: "0.2s",
                 spots: "8 teams remaining",
                 level: "Teams of 2-4 Students"
@@ -242,7 +242,7 @@ export default function HomePage() {
                 time: "3:00 PM - 6:00 PM",
                 type: "🎯 Career Development",
                 description: "Resume workshops, mock interviews, and tips for the upcoming SLIIT career fair with tech companies",
-                gradient: "from-orange-500 to-red-500",
+                gradient: "from-blue-500 to-orange-500",
                 delay: "0.4s",
                 spots: "25 slots open",
                 level: "3rd & 4th Year Focus"
@@ -330,7 +330,7 @@ export default function HomePage() {
                 icon: Shield,
                 members: "32+",
                 description: "Ethical hacking practice, CTF competitions, and cybersecurity certification preparation",
-                color: "from-red-500 to-pink-500",
+                color: "from-red-500 to-orange-500",
                 delay: "0.1s",
                 activity: "CTF Practice & Labs",
                 growth: "+6 this semester"
@@ -350,7 +350,7 @@ export default function HomePage() {
                 icon: Trophy,
                 members: "28+",
                 description: "Algorithm practice, contest preparation, and representing SLIIT in programming competitions",
-                color: "from-yellow-500 to-orange-500",
+                color: "from-orange-500 to-yellow-500",
                 delay: "0.3s",
                 activity: "Contest Training",
                 growth: "+5 this semester"
@@ -439,7 +439,7 @@ export default function HomePage() {
                 date: "3 days ago",
                 readTime: "6 min read",
                 excerpt: "How I prepared for and secured my internship, what I learned, and tips for fellow SLIIT students applying for tech internships.",
-                gradient: "from-purple-500 to-pink-500",
+                gradient: "from-orange-500 to-red-500",
                 delay: "0.2s",
                 category: "Career Stories",
                 likes: "67",
@@ -451,7 +451,7 @@ export default function HomePage() {
                 date: "1 week ago",
                 readTime: "8 min read",
                 excerpt: "Step-by-step guide to setting up IDEs, Git, and development tools that every SLIIT CS student needs for coursework and projects.",
-                gradient: "from-orange-500 to-red-500",
+                gradient: "from-blue-500 to-orange-500",
                 delay: "0.4s",
                 category: "Technical Guides",
                 likes: "94",
@@ -510,7 +510,7 @@ export default function HomePage() {
       {/* Enhanced CTA Section */}
       <section className="py-32 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-white/[0.05] bg-grid-large" />
-        <div className="absolute inset-0 bg-gradient-to-r from-primary via-blue-600 to-purple-600" />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary via-blue-600 to-orange-600" />
         <div className="absolute inset-0 particles-bg opacity-40" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-black/20" />
         <div className="container mx-auto px-4 text-center relative z-10">
@@ -552,7 +552,7 @@ export default function HomePage() {
                 <span>🤝 Study Groups</span>
               </div>
               <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" />
+                <div className="w-2 h-2 bg-orange-400 rounded-full animate-pulse" />
                 <span>💼 Career Prep</span>
               </div>
             </div>

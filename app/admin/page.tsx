@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { Navbar } from "@/components/layout/navbar"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -14,57 +14,37 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Users, Calendar, FileText, MessageSquare, Plus, Edit, Trash2, Eye } from "lucide-react"
+import { useAdminData } from "@/hooks/use-admin-data"
 import { useToast } from "@/hooks/use-toast"
 
-interface BlogPost {
-  id: string
-  title: string
-  author: string
-  status: 'Published' | 'Draft' | 'Review'
-  date: string
-}
-
-interface Event {
-  id: string
-  title: string
-  date: string
-  type: string
-  attendees: number
-}
-
-interface NewsItem {
-  id: string
-  title: string
-  date: string
-  priority: 'High' | 'Medium' | 'Low'
-}
-
-interface FormSubmission {
-  id: string
-  type: string
-  name: string
-  email: string
-  date: string
-  status: 'Unread' | 'Processed' | 'Confirmed'
-}
-
-interface User {
-  id: string
-  name: string
-  email: string
-  role: 'Admin' | 'Editor' | 'Member'
-  status: 'Active' | 'Inactive'
-}
-
 export default function AdminDashboard() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const { toast } = useToast();
+  const {
+    // Authentication
+    isAuthenticated,
+    isLoading,
+    login,
+    logout,
+    
+    // Data
+    blogPosts,
+    events,
+    newsItems,
+    formSubmissions,
+    users,
+    stats,
+    
+    // Actions
+    createBlogPost,
+    updateBlogPost,
+    deleteBlogPost,
+    createEvent,
+    deleteEvent,
+    createNews,
+    deleteNews
+  } = useAdminData();
+
   const [loginForm, setLoginForm] = useState({ username: "", password: "" })
-  const [stats, setStats] = useState({
-    totalMembers: 524,
-    activeEvents: 8,
-    blogPosts: 42,
-    formSubmissions: 18
-  })
   
   // Dialog states
   const [blogDialogOpen, setBlogDialogOpen] = useState(false)
@@ -73,192 +53,137 @@ export default function AdminDashboard() {
   const [editingItem, setEditingItem] = useState<any>(null)
   
   // Form states
-  const [blogForm, setBlogForm] = useState({ title: '', content: '', author: '', status: 'Draft' })
+  const [blogForm, setBlogForm] = useState({ title: '', content: '', author: '', status: 'draft' })
   const [eventForm, setEventForm] = useState({ title: '', date: '', type: '', attendees: 0 })
   const [newsForm, setNewsForm] = useState({ title: '', priority: 'Medium' })
-  
-  // Data states
-  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([
-    { id: '1', title: "Getting Started with React Hooks", author: "Sarah Chen", status: "Published", date: "Jan 10, 2024" },
-    { id: '2', title: "Machine Learning in Web Development", author: "Alex Kumar", status: "Draft", date: "Jan 8, 2024" },
-    { id: '3', title: "Cybersecurity Best Practices", author: "Maya Patel", status: "Review", date: "Jan 5, 2024" },
-  ])
-  
-  const [events, setEvents] = useState<Event[]>([
-    { id: '1', title: "AI Workshop Series", date: "Jan 15, 2024", type: "Workshop", attendees: 45 },
-    { id: '2', title: "Hackathon 2024", date: "Jan 20-21, 2024", type: "Competition", attendees: 120 },
-    { id: '3', title: "Industry Talk: Cybersecurity", date: "Jan 25, 2024", type: "Seminar", attendees: 80 },
-  ])
-  
-  const [newsItems, setNewsItems] = useState<NewsItem[]>([
-    { id: '1', title: "New AI Club Formation", date: "Jan 12, 2024", priority: "High" },
-    { id: '2', title: "Semester Break Schedule", date: "Jan 10, 2024", priority: "Medium" },
-    { id: '3', title: "Resource Library Update", date: "Jan 8, 2024", priority: "Low" },
-  ])
-  
-  const [formSubmissions] = useState<FormSubmission[]>([
-    { id: '1', type: "Contact Form", name: "John Doe", email: "john@example.com", date: "Jan 12, 2024", status: "Unread" },
-    { id: '2', type: "Join Request", name: "Jane Smith", email: "jane@example.com", date: "Jan 11, 2024", status: "Processed" },
-    { id: '3', type: "Event Registration", name: "Mike Johnson", email: "mike@example.com", date: "Jan 10, 2024", status: "Confirmed" },
-  ])
-  
-  const [users] = useState<User[]>([
-    { id: '1', name: "Alex Chen", email: "alex@sliitcshub.lk", role: "Admin", status: "Active" },
-    { id: '2', name: "Sarah Kumar", email: "sarah@sliitcshub.lk", role: "Editor", status: "Active" },
-    { id: '3', name: "David Silva", email: "david@sliitcshub.lk", role: "Member", status: "Active" },
-  ])
 
-  const { toast } = useToast()
-
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Simple authentication simulation
-    if (loginForm.username === "admin" && loginForm.password === "admin123") {
-      setIsAuthenticated(true)
-      toast({
-        title: "Login Successful",
-        description: "Welcome to the admin dashboard!",
-      })
-    } else {
-      toast({
-        title: "Login Failed",
-        description: "Invalid credentials. Try admin/admin123",
-        variant: "destructive",
-      })
+    try {
+      await login(loginForm)
+      setLoginForm({ username: "", password: "" })
+    } catch (error) {
+      // Error is handled in the hook
     }
+  }
+
+  const handleLogout = async () => {
+    await logout()
   }
 
   // Blog post functions
-  const handleCreateBlogPost = () => {
+  const handleCreateBlogPost = async () => {
     if (!blogForm.title || !blogForm.content || !blogForm.author) {
-      toast({
-        title: "Error",
-        description: "Please fill in all required fields",
-        variant: "destructive",
-      })
       return
     }
     
-    const newPost: BlogPost = {
-      id: Date.now().toString(),
-      title: blogForm.title,
-      author: blogForm.author,
-      status: blogForm.status as 'Published' | 'Draft' | 'Review',
-      date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+    try {
+      if (editingItem) {
+        // Update existing post
+        await updateBlogPost(editingItem._id, {
+          title: blogForm.title,
+          content: blogForm.content,
+          author: blogForm.author,
+          status: blogForm.status
+        })
+      } else {
+        // Create new post
+        await createBlogPost({
+          title: blogForm.title,
+          content: blogForm.content,
+          author: blogForm.author,
+          status: blogForm.status
+        })
+      }
+      setBlogForm({ title: '', content: '', author: '', status: 'draft' })
+      setBlogDialogOpen(false)
+      setEditingItem(null)
+    } catch (error) {
+      // Error is handled in the hook
     }
-    
-    setBlogPosts([newPost, ...blogPosts])
-    setBlogForm({ title: '', content: '', author: '', status: 'Draft' })
-    setBlogDialogOpen(false)
-    
-    toast({
-      title: "Success",
-      description: "Blog post created successfully!",
-    })
   }
 
-  const handleEditBlogPost = (post: BlogPost) => {
+  const handleEditBlogPost = (post: any) => {
     setBlogForm({
       title: post.title,
-      author: post.author,
+      author: typeof post.author === 'object' ? post.author.name : post.author,
       status: post.status,
-      content: ''
+      content: post.content || ''
     })
     setEditingItem(post)
     setBlogDialogOpen(true)
   }
 
-  const handleDeleteBlogPost = (postId: string) => {
-    setBlogPosts(blogPosts.filter(post => post.id !== postId))
-    toast({
-      title: "Success",
-      description: "Blog post deleted successfully!",
-    })
+  const handleDeleteBlogPost = async (postId: string) => {
+    try {
+      await deleteBlogPost(postId)
+    } catch (error) {
+      // Error is handled in the hook
+    }
   }
 
   // Event functions
-  const handleCreateEvent = () => {
+  const handleCreateEvent = async () => {
     if (!eventForm.title || !eventForm.date || !eventForm.type) {
-      toast({
-        title: "Error",
-        description: "Please fill in all required fields",
-        variant: "destructive",
-      })
       return
     }
     
-    const newEvent: Event = {
-      id: Date.now().toString(),
-      title: eventForm.title,
-      date: eventForm.date,
-      type: eventForm.type,
-      attendees: eventForm.attendees || 0
+    try {
+      await createEvent({
+        title: eventForm.title,
+        date: eventForm.date,
+        type: eventForm.type,
+        maxAttendees: eventForm.attendees > 0 ? eventForm.attendees : undefined
+      })
+      setEventForm({ title: '', date: '', type: '', attendees: 0 })
+      setEventDialogOpen(false)
+    } catch (error) {
+      // Error is handled in the hook
     }
-    
-    setEvents([newEvent, ...events])
-    setEventForm({ title: '', date: '', type: '', attendees: 0 })
-    setEventDialogOpen(false)
-    
-    toast({
-      title: "Success",
-      description: "Event created successfully!",
-    })
   }
 
-  const handleDeleteEvent = (eventId: string) => {
-    setEvents(events.filter(event => event.id !== eventId))
-    toast({
-      title: "Success",
-      description: "Event deleted successfully!",
-    })
+  const handleDeleteEvent = async (eventId: string) => {
+    try {
+      await deleteEvent(eventId)
+    } catch (error) {
+      // Error is handled in the hook
+    }
   }
 
   // News functions
-  const handleCreateNews = () => {
+  const handleCreateNews = async () => {
     if (!newsForm.title) {
-      toast({
-        title: "Error",
-        description: "Please enter a title",
-        variant: "destructive",
-      })
       return
     }
     
-    const newNews: NewsItem = {
-      id: Date.now().toString(),
-      title: newsForm.title,
-      priority: newsForm.priority as 'High' | 'Medium' | 'Low',
-      date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+    try {
+      await createNews({
+        title: newsForm.title,
+        priority: newsForm.priority
+      })
+      setNewsForm({ title: '', priority: 'Medium' })
+      setNewsDialogOpen(false)
+    } catch (error) {
+      // Error is handled in the hook
     }
-    
-    setNewsItems([newNews, ...newsItems])
-    setNewsForm({ title: '', priority: 'Medium' })
-    setNewsDialogOpen(false)
-    
-    toast({
-      title: "Success",
-      description: "News item created successfully!",
-    })
   }
 
-  const handleDeleteNews = (newsId: string) => {
-    setNewsItems(newsItems.filter(news => news.id !== newsId))
-    toast({
-      title: "Success",
-      description: "News item deleted successfully!",
-    })
+  const handleDeleteNews = async (newsId: string) => {
+    try {
+      await deleteNews(newsId)
+    } catch (error) {
+      // Error is handled in the hook
+    }
   }
 
-  // Load data on mount (simulate API calls)
-  useEffect(() => {
-    // Simulate loading data from API
-    setStats({
-      totalMembers: blogPosts.length + events.length + newsItems.length + 500,
-      activeEvents: events.length,
-      blogPosts: blogPosts.length,
-      formSubmissions: formSubmissions.length
+  // Helper function to format date
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('en-US', { 
+      month: 'short', 
+      day: 'numeric', 
+      year: 'numeric' 
     })
-  }, [blogPosts, events, newsItems, formSubmissions])
+  }
 
   if (!isAuthenticated) {
     return (
@@ -385,9 +310,10 @@ export default function AdminDashboard() {
             <p className="text-xl text-muted-foreground">🚀 Manage your SLIIT CS Hub community</p>
           </div>
           <Button 
-            onClick={() => setIsAuthenticated(false)} 
+            onClick={handleLogout} 
             variant="outline" 
             className="glass-effect hover:scale-105 transition-all duration-300 group"
+            disabled={isLoading}
           >
             <Users className="mr-2 h-4 w-4 group-hover:animate-pulse" />
             Logout
@@ -399,15 +325,15 @@ export default function AdminDashboard() {
           {[
             {
               title: "Total Members",
-              value: stats.totalMembers,
-              change: "+12% from last month",
+              value: stats?.overview.totalUsers || 0,
+              change: `+${stats?.growth.users || 0}% from last month`,
               icon: Users,
               gradient: "from-blue-500 to-cyan-500",
               delay: "0s"
             },
             {
               title: "Active Events", 
-              value: stats.activeEvents,
+              value: stats?.overview.upcomingEvents || events.length,
               change: "3 this week",
               icon: Calendar,
               gradient: "from-green-500 to-emerald-500",
@@ -415,16 +341,16 @@ export default function AdminDashboard() {
             },
             {
               title: "Blog Posts",
-              value: stats.blogPosts, 
-              change: "5 pending review",
+              value: stats?.overview.totalBlogPosts || blogPosts.length, 
+              change: `${stats?.overview.draftBlogPosts || 0} pending review`,
               icon: FileText,
               gradient: "from-purple-500 to-pink-500",
               delay: "0.2s"
             },
             {
               title: "Form Submissions",
-              value: stats.formSubmissions,
-              change: "12 unread", 
+              value: formSubmissions.length,
+              change: `${formSubmissions.filter(s => s.status === 'Unread').length} unread`, 
               icon: MessageSquare,
               gradient: "from-orange-500 to-red-500",
               delay: "0.3s"
@@ -497,24 +423,24 @@ export default function AdminDashboard() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {blogPosts.map((post, index) => (
+                  {blogPosts && blogPosts.length > 0 ? blogPosts.map((post, index) => (
                     <div 
-                      key={post.id} 
+                      key={post._id} 
                       className="flex items-center justify-between p-6 border border-border/30 rounded-xl glass-effect hover:scale-105 transition-all duration-300 animate-scale-in group"
                       style={{ animationDelay: `${index * 0.1}s` }}
                     >
                       <div>
                         <h3 className="font-semibold text-lg group-hover:text-primary transition-colors">{post.title}</h3>
                         <p className="text-sm text-muted-foreground">
-                          👤 By {post.author} • 📅 {post.date}
+                          👤 By {typeof post.author === 'object' ? post.author.name : post.author} • 📅 {formatDate(post.createdAt)}
                         </p>
                       </div>
                       <div className="flex items-center space-x-3">
                         <Badge 
-                          variant={post.status === "Published" ? "default" : "secondary"}
+                          variant={post.status === "published" ? "default" : "secondary"}
                           className="glass-effect"
                         >
-                          {post.status}
+                          {post.status.charAt(0).toUpperCase() + post.status.slice(1)}
                         </Badge>
                         <Button 
                           size="sm" 
@@ -536,13 +462,18 @@ export default function AdminDashboard() {
                           size="sm" 
                           variant="ghost" 
                           className="hover:scale-110 transition-all text-red-500 hover:text-red-600"
-                          onClick={() => handleDeleteBlogPost(post.id)}
+                          onClick={() => handleDeleteBlogPost(post._id)}
                         >
                           <Trash2 className="h-4 w-4" />
                         </Button>
                       </div>
                     </div>
-                  ))}
+                  )) : (
+                    <div className="text-center py-8 text-muted-foreground">
+                      <FileText className="h-12 w-12 mx-auto mb-4 opacity-50" />
+                      <p>No blog posts found. Create your first post!</p>
+                    </div>
+                  )}
                 </div>
               </CardContent>
             </Card>
@@ -569,16 +500,20 @@ export default function AdminDashboard() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {events.map((event, index) => (
+                  {events && events.length > 0 ? events.map((event, index) => (
                     <div 
-                      key={event.id} 
+                      key={event._id} 
                       className="flex items-center justify-between p-6 border border-border/30 rounded-xl glass-effect hover:scale-105 transition-all duration-300 animate-scale-in group"
                       style={{ animationDelay: `${index * 0.1}s` }}
                     >
                       <div>
                         <h3 className="font-semibold text-lg group-hover:text-green-500 transition-colors">{event.title}</h3>
                         <p className="text-sm text-muted-foreground">
-                          📅 {event.date} • 👥 {event.attendees} registered
+                          📅 {new Date(event.date).toLocaleDateString('en-US', { 
+                            month: 'short', 
+                            day: 'numeric', 
+                            year: 'numeric' 
+                          })} • 👥 {event.attendees?.length || 0} registered
                         </p>
                       </div>
                       <div className="flex items-center space-x-3">
@@ -595,13 +530,18 @@ export default function AdminDashboard() {
                           size="sm" 
                           variant="ghost" 
                           className="hover:scale-110 transition-all text-red-500 hover:text-red-600"
-                          onClick={() => handleDeleteEvent(event.id)}
+                          onClick={() => handleDeleteEvent(event._id)}
                         >
                           <Trash2 className="h-4 w-4" />
                         </Button>
                       </div>
                     </div>
-                  ))}
+                  )) : (
+                    <div className="text-center py-8 text-muted-foreground">
+                      <Calendar className="h-12 w-12 mx-auto mb-4 opacity-50" />
+                      <p>No events found. Create your first event!</p>
+                    </div>
+                  )}
                 </div>
               </CardContent>
             </Card>
@@ -628,15 +568,15 @@ export default function AdminDashboard() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {newsItems.map((news, index) => (
+                  {newsItems && newsItems.length > 0 ? newsItems.map((news, index) => (
                     <div 
-                      key={news.id} 
+                      key={news._id} 
                       className="flex items-center justify-between p-6 border border-border/30 rounded-xl glass-effect hover:scale-105 transition-all duration-300 animate-scale-in group"
                       style={{ animationDelay: `${index * 0.1}s` }}
                     >
                       <div>
                         <h3 className="font-semibold text-lg group-hover:text-purple-500 transition-colors">{news.title}</h3>
-                        <p className="text-sm text-muted-foreground">📅 {news.date}</p>
+                        <p className="text-sm text-muted-foreground">📅 {formatDate(news.createdAt)}</p>
                       </div>
                       <div className="flex items-center space-x-3">
                         <Badge
@@ -663,13 +603,18 @@ export default function AdminDashboard() {
                           size="sm" 
                           variant="ghost" 
                           className="hover:scale-110 transition-all text-red-500 hover:text-red-600"
-                          onClick={() => handleDeleteNews(news.id)}
+                          onClick={() => handleDeleteNews(news._id)}
                         >
                           <Trash2 className="h-4 w-4" />
                         </Button>
                       </div>
                     </div>
-                  ))}
+                  )) : (
+                    <div className="text-center py-8 text-muted-foreground">
+                      <MessageSquare className="h-12 w-12 mx-auto mb-4 opacity-50" />
+                      <p>No announcements found. Create your first announcement!</p>
+                    </div>
+                  )}
                 </div>
               </CardContent>
             </Card>
@@ -692,16 +637,16 @@ export default function AdminDashboard() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {formSubmissions.map((submission, index) => (
+                  {formSubmissions && formSubmissions.length > 0 ? formSubmissions.map((submission, index) => (
                     <div 
-                      key={submission.id} 
+                      key={submission._id} 
                       className="flex items-center justify-between p-6 border border-border/30 rounded-xl glass-effect hover:scale-105 transition-all duration-300 animate-scale-in group"
                       style={{ animationDelay: `${index * 0.1}s` }}
                     >
                       <div>
                         <h3 className="font-semibold text-lg group-hover:text-orange-500 transition-colors">{submission.type}</h3>
                         <p className="text-sm text-muted-foreground">
-                          👤 {submission.name} • 📧 {submission.email} • 📅 {submission.date}
+                          👤 {submission.name} • 📧 {submission.email} • 📅 {formatDate(submission.createdAt)}
                         </p>
                       </div>
                       <div className="flex items-center space-x-3">
@@ -721,7 +666,12 @@ export default function AdminDashboard() {
                         </Button>
                       </div>
                     </div>
-                  ))}
+                  )) : (
+                    <div className="text-center py-8 text-muted-foreground">
+                      <MessageSquare className="h-12 w-12 mx-auto mb-4 opacity-50" />
+                      <p>No form submissions found.</p>
+                    </div>
+                  )}
                 </div>
               </CardContent>
             </Card>
@@ -738,7 +688,7 @@ export default function AdminDashboard() {
                     <CardDescription className="text-lg">Manage user access and roles</CardDescription>
                   </div>
                   <Badge variant="outline" className="glass-effect text-lg px-4 py-2">
-                    {users.filter(u => u.status === 'Active').length} Active Users
+                    {users.length} Active Users
                   </Badge>
                 </div>
               </CardHeader>
@@ -746,7 +696,7 @@ export default function AdminDashboard() {
                 <div className="space-y-4">
                   {users.map((user, index) => (
                     <div 
-                      key={user.id} 
+                      key={user._id} 
                       className="flex items-center justify-between p-6 border border-border/30 rounded-xl glass-effect hover:scale-105 transition-all duration-300 animate-scale-in group"
                       style={{ animationDelay: `${index * 0.1}s` }}
                     >
@@ -757,10 +707,10 @@ export default function AdminDashboard() {
                       <div className="flex items-center space-x-3">
                         <Badge variant="outline" className="glass-effect">{user.role}</Badge>
                         <Badge 
-                          variant={user.status === "Active" ? "default" : "secondary"}
+                          variant="default"
                           className="glass-effect"
                         >
-                          {user.status}
+                          Active
                         </Badge>
                         <Button 
                           size="sm" 
@@ -827,9 +777,9 @@ export default function AdminDashboard() {
                     <SelectValue placeholder="Select status" />
                   </SelectTrigger>
                   <SelectContent className="glass-effect border-border/30">
-                    <SelectItem value="Draft">📝 Draft</SelectItem>
-                    <SelectItem value="Review">👀 Review</SelectItem>
-                    <SelectItem value="Published">✅ Published</SelectItem>
+                    <SelectItem value="draft">📝 Draft</SelectItem>
+                    <SelectItem value="review">👀 Review</SelectItem>
+                    <SelectItem value="published">✅ Published</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
