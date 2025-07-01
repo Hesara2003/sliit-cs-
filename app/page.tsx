@@ -56,15 +56,19 @@ export default function HomePage() {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="glow-effect btn-glow text-lg px-8 py-6 hover:scale-105 transition-all duration-300 group">
-                  <Rocket className="mr-2 h-5 w-5 group-hover:animate-bounce" />
-                  Join Our Community
-                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                </Button>
-                <Button variant="outline" size="lg" className="glass-effect text-lg px-8 py-6 bg-transparent hover:scale-105 transition-all duration-300 group">
-                  <Calendar className="mr-2 h-5 w-5 group-hover:animate-pulse" />
-                  Campus Events
-                </Button>
+                <Link href="/clubs">
+                  <Button size="lg" className="glow-effect btn-glow text-lg px-8 py-6 hover:scale-105 transition-all duration-300 group">
+                    <Rocket className="mr-2 h-5 w-5 group-hover:animate-bounce" />
+                    Join Our Community
+                    <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </Link>
+                <Link href="/events">
+                  <Button variant="outline" size="lg" className="glass-effect text-lg px-8 py-6 bg-transparent hover:scale-105 transition-all duration-300 group">
+                    <Calendar className="mr-2 h-5 w-5 group-hover:animate-pulse" />
+                    Campus Events
+                  </Button>
+                </Link>
               </div>
 
               <div className="flex items-center space-x-8 text-sm">
@@ -276,11 +280,13 @@ export default function HomePage() {
                       <div className={`w-3 h-3 rounded-full bg-gradient-to-r ${event.gradient} animate-pulse`} />
                       <span className="text-sm font-medium">{event.time}</span>
                     </div>
-                    <Button size="sm" variant="ghost" className="btn-glow group-hover:scale-105 transition-transform">
-                      <Heart className="mr-1 h-3 w-3 group-hover:fill-current group-hover:text-red-500 transition-colors" />
-                      Join Now
-                      <ArrowRight className="ml-1 h-3 w-3 group-hover:translate-x-1 transition-transform" />
-                    </Button>
+                    <Link href="/events">
+                      <Button size="sm" variant="ghost" className="btn-glow group-hover:scale-105 transition-transform">
+                        <Heart className="mr-1 h-3 w-3 group-hover:fill-current group-hover:text-red-500 transition-colors" />
+                        Join Now
+                        <ArrowRight className="ml-1 h-3 w-3 group-hover:translate-x-1 transition-transform" />
+                      </Button>
+                    </Link>
                   </div>
                 </CardContent>
               </Card>
@@ -376,10 +382,12 @@ export default function HomePage() {
                   <Badge variant="outline" className="w-fit mx-auto text-xs glass-effect">
                     📅 {club.activity}
                   </Badge>
-                  <Button size="sm" variant="outline" className="w-full glass-effect bg-transparent btn-glow group-hover:scale-105 transition-all">
-                    <Rocket className="mr-2 h-3 w-3 group-hover:animate-bounce" />
-                    Join the Squad
-                  </Button>
+                  <Link href="/clubs">
+                    <Button size="sm" variant="outline" className="w-full glass-effect bg-transparent btn-glow group-hover:scale-105 transition-all">
+                      <Rocket className="mr-2 h-3 w-3 group-hover:animate-bounce" />
+                      Join the Squad
+                    </Button>
+                  </Link>
                 </CardContent>
               </Card>
             ))}
@@ -485,10 +493,12 @@ export default function HomePage() {
                       <Heart className="h-4 w-4 text-red-500" />
                       <span className="text-sm font-medium">{post.likes} likes</span>
                     </div>
-                    <Button size="sm" variant="ghost" className="p-0 h-auto btn-glow group-hover:scale-105 transition-all">
-                      Dive In
-                      <ArrowRight className="ml-1 h-3 w-3 group-hover:translate-x-1 transition-transform" />
-                    </Button>
+                    <Link href="/blog">
+                      <Button size="sm" variant="ghost" className="p-0 h-auto btn-glow group-hover:scale-105 transition-all">
+                        Dive In
+                        <ArrowRight className="ml-1 h-3 w-3 group-hover:translate-x-1 transition-transform" />
+                      </Button>
+                    </Link>
                   </div>
                 </CardContent>
               </Card>
@@ -515,18 +525,22 @@ export default function HomePage() {
               and make your university experience unforgettable. It's completely free for all SLIIT students!
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center pt-8">
-              <Button size="lg" variant="secondary" className="text-lg px-10 py-7 btn-glow hover:scale-110 transition-all duration-300 group">
-                <Rocket className="mr-2 h-6 w-6 group-hover:animate-bounce" />
-                Join with SLIIT Email - FREE!
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-white text-white hover:bg-white hover:text-primary bg-transparent glass-effect text-lg px-10 py-7 hover:scale-110 transition-all duration-300 group"
-              >
-                <Globe className="mr-2 h-6 w-6 group-hover:animate-spin" />
-                Explore Community
-              </Button>
+              <Link href="/clubs">
+                <Button size="lg" variant="secondary" className="text-lg px-10 py-7 btn-glow hover:scale-110 transition-all duration-300 group">
+                  <Rocket className="mr-2 h-6 w-6 group-hover:animate-bounce" />
+                  Join with SLIIT Email - FREE!
+                </Button>
+              </Link>
+              <Link href="/about">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="border-white text-white hover:bg-white hover:text-primary bg-transparent glass-effect text-lg px-10 py-7 hover:scale-110 transition-all duration-300 group"
+                >
+                  <Globe className="mr-2 h-6 w-6 group-hover:animate-spin" />
+                  Explore Community
+                </Button>
+              </Link>
             </div>
             <div className="flex justify-center space-x-8 pt-6 text-sm opacity-80">
               <div className="flex items-center space-x-2">
