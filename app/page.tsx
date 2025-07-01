@@ -34,7 +34,7 @@ export default function HomePage() {
       {/* Enhanced Hero Section */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-white/[0.03] bg-grid-medium" />
-        <div className="absolute inset-0 hero-gradient opacity-80" />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-orange-900/30 to-background/50 opacity-80" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/10 to-background/30" />
         <div className="container mx-auto px-4 py-32 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -121,8 +121,9 @@ export default function HomePage() {
 
       {/* Enhanced Mission Section */}
       <section className="py-32 relative">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/10 via-orange-900/15 to-background/20" />
         <div className="absolute inset-0" style={{ 
-          backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(rgba(59, 130, 246, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(251, 146, 60, 0.02) 1px, transparent 1px)`,
           backgroundSize: '20px 20px'
         }} />
         <div className="container mx-auto px-4 relative z-10">
@@ -191,7 +192,7 @@ export default function HomePage() {
       {/* Enhanced Upcoming Events */}
       <section className="py-32 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-white/[0.03] bg-grid-medium" />
-        <div className="absolute inset-0 bg-gradient-to-br from-muted/20 via-muted/30 to-muted/40" />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-orange-900/30 to-muted/40" />
         <div className="absolute inset-0 particles-bg opacity-30" />
         <div className="container mx-auto px-4 relative z-10">
           <div className="flex justify-between items-center mb-16">
@@ -297,8 +298,9 @@ export default function HomePage() {
 
       {/* Enhanced Featured Clubs */}
       <section className="py-32 relative">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/10 via-orange-900/15 to-background/20" />
         <div className="absolute inset-0" style={{ 
-          backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(rgba(59, 130, 246, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(251, 146, 60, 0.02) 1px, transparent 1px)`,
           backgroundSize: '20px 20px'
         }} />
         <div className="container mx-auto px-4 relative z-10">
@@ -330,7 +332,7 @@ export default function HomePage() {
                 icon: Shield,
                 members: "32+",
                 description: "Ethical hacking practice, CTF competitions, and cybersecurity certification preparation",
-                color: "from-red-500 to-orange-500",
+                color: "from-orange-500 to-red-500",
                 delay: "0.1s",
                 activity: "CTF Practice & Labs",
                 growth: "+6 this semester"
@@ -340,7 +342,7 @@ export default function HomePage() {
                 icon: Code,
                 members: "78+",
                 description: "Modern web development, project collaborations, and internship preparation workshops",
-                color: "from-green-500 to-emerald-500",
+                color: "from-blue-600 to-orange-500",
                 delay: "0.2s",
                 activity: "Weekly Code Sessions",
                 growth: "+12 this semester"
@@ -398,7 +400,7 @@ export default function HomePage() {
       {/* Enhanced Latest Blog Posts */}
       <section className="py-32 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-white/[0.03] bg-grid-medium" />
-        <div className="absolute inset-0 bg-gradient-to-br from-muted/20 via-muted/30 to-muted/40" />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-orange-900/30 to-muted/40" />
         <div className="absolute inset-0 particles-bg opacity-20" />
         <div className="container mx-auto px-4 relative z-10">
           <div className="flex justify-between items-center mb-16">
@@ -510,7 +512,7 @@ export default function HomePage() {
       {/* Enhanced CTA Section */}
       <section className="py-32 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-white/[0.05] bg-grid-large" />
-        <div className="absolute inset-0 bg-gradient-to-r from-primary via-blue-600 to-orange-600" />
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-blue-700 to-orange-600" />
         <div className="absolute inset-0 particles-bg opacity-40" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-black/20" />
         <div className="container mx-auto px-4 text-center relative z-10">
@@ -544,15 +546,15 @@ export default function HomePage() {
             </div>
             <div className="flex justify-center space-x-8 pt-6 text-sm opacity-80">
               <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
                 <span>📚 Academic Support</span>
               </div>
               <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
+                <div className="w-2 h-2 bg-orange-400 rounded-full animate-pulse" />
                 <span>🤝 Study Groups</span>
               </div>
               <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-orange-400 rounded-full animate-pulse" />
+                <div className="w-2 h-2 bg-blue-300 rounded-full animate-pulse" />
                 <span>💼 Career Prep</span>
               </div>
             </div>
